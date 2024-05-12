@@ -4,7 +4,9 @@
 
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
+ports:
+  - port: 3000
+    onOpen: open-preview
 tasks:
-  - init: npm install
-
-
+  - before: if [[ -z "$experiment" ]]; then cd playground/MeuPrimeiroJogoMultiplayer; else cd playground/$experiment; fi
+    command: nvm install 13.3.0 && npm install && npm start
