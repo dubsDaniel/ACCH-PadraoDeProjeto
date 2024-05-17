@@ -1,11 +1,11 @@
 import express from "express";
 import http from "http";
 import createGame from "./public/game.js";
-import socketio from "socket.io";
+import {Server as socketio} from "socket.io";
 
 const app = express();
 const server = http.createServer(app);
-const sockets = socketio(server);
+const sockets = new socketio(server);
 
 app.use(express.static("public"));
 
@@ -22,7 +22,6 @@ sockets.on("connection", (socket) => {
   console.log(`> Player connected: ${playerId}`);
 
   game.addPlayer({ playerId: playerId });
-  console.log(game.state);
 
   socket.emit("setup", game.state);
 
